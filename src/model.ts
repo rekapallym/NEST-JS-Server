@@ -1,14 +1,13 @@
 
 
-export interface TransactionRequest {
-    transLogRowId: string;
-  }
-  
-  
- export  interface TransResponse {
-    data: Data;
-  }
-  interface Data{
-    value: string;
-    timestamp: string;
-  }
+export interface ITransactionRequest {
+  transLogRowId: string;
+}
+
+ export interface ITransResponse {
+  data: IData;
+}
+interface IData{
+  value: string;
+  timestamp: string;
+}

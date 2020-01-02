@@ -1,21 +1,9 @@
 import { Controller, Logger } from '@nestjs/common';
 import { TransLogService } from './translog.service';
 import { GrpcMethod } from '@nestjs/microservices';
-import { BigtableService } from './bigtable/bigtable.service';
+import {ITransactionRequest, ITransResponse } from './model';
+// import { BigtableService } from './bigtable/bigtable.service';
 
-
-interface TransactionRequest {
-  transLogRowId: string;
-}
-
-
-interface TransResponse {
-  data: Data;
-}
-interface Data{
-  value: string;
-  timestamp: string;
-}
 
 @Controller()
 export class AppController {
@@ -23,15 +11,17 @@ export class AppController {
   private logger = new Logger('AppController');
 
   // Inject the math service
-  constructor(private bigtable: BigtableService) {}
+  constructor(private transLog : TransLogService ) {}
 
-  @GrpcMethod('AppController', 'Accumulate')
+  @GrpcMethod('AppController', 'GetTransactionByRowId')
 
 
-  getTransactionByRowId(transcationrequest: TransactionRequest) {
+  getTransactionByRowId(transcationrequest: ITransactionRequest): ITransResponse {
     this.logger.log('Adding ' + transcationrequest.transLogRowId);
-    this.bigtable.quickstart();
-    return {Trans: transcationrequest.transLogRowId};
+    // let transres = this.transLog.getTransactionByRowId(transcationrequest);
+    return this.transLog.getTransactionByRowId(transcationrequest).then(trans => {
+      return trans;
+    });
   }
 //gettranslogbyrowid(rowid) => will call bigtable
 }

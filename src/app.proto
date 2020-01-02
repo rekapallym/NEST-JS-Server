@@ -7,7 +7,6 @@ service AppController {
 }
 
 
-
 message TransactionRequest {
     string transLogRowId = 1;
 }
