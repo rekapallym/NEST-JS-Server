@@ -1,0 +1,17 @@
+// syntax = "proto3";
+
+// package app;
+
+// service BigtableController {
+//     rpc GetData (SayHelloRequest) returns (DataArray);
+// }
+
+// // declare the types used above
+
+// message DataArray {
+//     repeated string data = 1;
+// }
+
+// message SayHelloRequest {}
+
+
