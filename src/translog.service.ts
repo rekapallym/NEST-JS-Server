@@ -6,14 +6,20 @@ const Bigtable = require('@google-cloud/bigtable');
 
 @Injectable()
 export class TransLogService {
-    bigtable = Bigtable();
+     bigtable = Bigtable();
+     instance: any;
+     table: any;
+
+
+    constructor() {
+        this.instance = this.bigtable.instance('kl-bt-key-dev-npe');
+        this.table = this.instance.table('EDataTable');
+    }
+   
     public async getTransactionByRowId(transLogReq: ITransactionRequest): Promise<ITransResponse> {
 
-        const instance = this.bigtable.instance('kl-bt-key-dev-npe');
-
-        const table = instance.table('EDataTable');
-
-        const [allRows] = await table.getRows({});
+        // const [allRows] = await this.table.row(transLogReq.transLogRowId).get();
+        const [allRows] = await this.table.getRows({});
 
         console.log('count of rows in bigtable', allRows.length);
     
