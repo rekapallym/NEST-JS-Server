@@ -1,13 +1,10 @@
-
-
 export interface ITransactionRequest {
   transLogRowId: string;
 }
-
- export interface ITransResponse {
-  data: IData;
+export interface ITransResponse {
+  data: Array <IData>;
 }
-interface IData{
+interface IData {
   value: string;
   timestamp: string;
 }

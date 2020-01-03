@@ -7,8 +7,6 @@ const Bigtable = require('@google-cloud/bigtable');
 export class BigtableService {
 
     bigtable = Bigtable();
-
-    //gettranslogbyid
     public async  quickstart() {
         const instance = this.bigtable.instance('kl-bt-key-dev-npe');
 
@@ -19,16 +17,9 @@ export class BigtableService {
         console.log('count of rows in bigtable', allRows.length);
 
         allRows.forEach(element => {
-          let transResponse = {
-            Data: {
-              value: element.data.EntityData.Data[0].value,
-              timestamp:  element.data.EntityData.Data[0].timestamp,
-            },
-          }
           console.log(element.data.EntityData);
         });
       }
-      
 
 }
 
